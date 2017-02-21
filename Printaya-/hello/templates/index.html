@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <a href="http://dragonfruit.me" class="lang-logo">
+      <img src="{% static 'logo.png'%}">
+    </a>
+    <h1>Welcome to Printaya</h1>
+    <p>This is the very first version of Printaya, a service designed to improve the printing experience of students and teachers around the globe.</p>
+    <form action="#" method="get">
+	<input type="submit" name="mybtn" value="Print a Test Page" class="btn btn-lg btn-default"></input>
+    </form>
+</div>
+</div>
+{% endblock %}
