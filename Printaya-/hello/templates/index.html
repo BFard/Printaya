@@ -10,9 +10,36 @@
     </a>
     <h1>Welcome to Printaya</h1>
     <p>This is the very first version of Printaya, a service designed to improve the printing experience of students and teachers around the globe.</p>
-    <form action="#" method="get">
-	<input type="submit" name="mybtn" value="Print a Test Page" class="btn btn-lg btn-default"></input>
-    </form>
-</div>
+	{% csrf_token %}
+        <div class="dropzone" id="dropzone">Drop files here to upload</div>
+        <script>
+	    (function() {
+		    var dropzone = document.getElementById("dropzone");
+		    var upload = function(file) {
+			var formData = new FormData();
+			var xhr = new XMLHttpRequest();
+			formData.append('file', file[0]);
+			console.log(formData);
+			xhr.open("POST", "");
+			xhr.setRequestHeader("X-CSRFToken", "{{csrf_token}}")
+			xhr.send(formData);
+		    };
+		    dropzone.ondrop = function(e) {
+			e.preventDefault();
+			this.className = "dropzone";
+			upload(e.dataTransfer.files);
+		    };
+		    dropzone.ondragover = function() {
+			    this.className = "dropzone dragover";
+			    return false;
+		    };
+		    dropzone.ondragleave = function() {
+			    this.className = "dropzone";
+			    return false;
+		    };
+	    }());
+        </script>
+	</br>
+  </div>
 </div>
 {% endblock %}
