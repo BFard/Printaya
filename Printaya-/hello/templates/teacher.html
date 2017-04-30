@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <a href="http://dragonfruit.me" class="lang-logo">
+      <img src="{% static 'logo.png'%}">
+    </a>
+    <h1>Welcome, {{ request.user.username }}!</h1>
+    <p>This is your teacher control panel, where you can set restrictions on your students' printing. Try setting a restriction below!</p>
+    <form action="" method="post">
+	{% csrf_token %}
+    	<p>My students can print <input id="teachinput" onkeypress="return event.charCode >= 48 && event.charCode <= 57" type="text" name="perday" /> page(s) per day</p>
+	<input id="teachsubmit" color="black" type="submit" value="Save" />
+    </form>
+    <h2>See what your students have printed:</h2>
+    <table>
+      <tr>
+        <th>Username</th>
+        <th>Date and Time</th>
+        <th>Filename</th>
+      </tr>
+      {% for row in data %}
+        <tr>
+          {% for entry in row %}
+            {% if entry == row|last %}
+              <td><a href="/media/{{ entry }}">{{ entry }}</a></td>
+            {% else %}
+              <td>{{ entry }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -43,16 +43,83 @@
     }
     .dropzone {
 	margin:auto;
-	width:200px;
-	height:200px;
+	width:300px;
+	height:300px;
 	border:2px dashed #ccc;
 	color:#ccc;
-	line-height:200px;
+	line-height:300px;
 	text-align:center;
     }
     .dropzone.dragover {
 	border-color:#000;
 	color:#000;
+    }
+    #teachinput {
+	color: #000;
+	text-align: right;
+	width: 40px;
+    }
+    #teachsubmit {
+	background: #79aec8;
+	text-align: center;
+	width: 110px;
+	border: none;
+	border-radius: 4px;
+	font-family: Verdana;
+	padding: 20px 30px;
+	font-size: 22px;
+	font-weight: normal;
+    }
+    #teachsubmit:hover {
+	background: #609ab6;
+    }
+
+    table {
+      table-layout: fixed;
+      width: 100%;
+      border-collapse: collapse;
+      border: 3px solid #3e1c74;
+    }
+
+    thead th:nth-child(1) {
+      width: 30%;
+    }
+
+    thead th:nth-child(2) {
+      width: 20%;
+    }
+
+    thead th:nth-child(3) {
+      width: 15%;
+    }
+
+    thead th:nth-child(4) {
+      width: 35%;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 20px;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #6a489e;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #8d71ba;
+    }
+
+    tbody tr {
+      background-image: url(noise.png);
+    }
+
+    table {
+      background-color: #ff33cc;
+    }
+
+    a {
+      color: #2a0a5a;
     }
 
   </style>
@@ -67,7 +134,12 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="navbar-right">
-        <a href="/admin/"><span class="glyphicon glyphicon-book"></span> Log In</a>
+        {% if user.is_authenticated %}
+		<a href="/logout/" style="display: inline-block"><span class="glyphicon glyphicon-book"></span> Log Out</a>
+	{% else %}
+		<a href="/login/" style="display: inline-block"><span class="glyphicon glyphicon-book"></span> Log In</a>
+	{% endif %}
+		<a href="/register/" style="display: inline-block"><span class="glyphicon glyphicon-book"></span> Register</a>
       </li>
     </ul>
   </div>

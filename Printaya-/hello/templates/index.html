@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-
 <div class="jumbotron text-center">
   <div class="container">
     <a href="http://dragonfruit.me" class="lang-logo">
@@ -10,36 +9,7 @@
     </a>
     <h1>Welcome to Printaya</h1>
     <p>This is the very first version of Printaya, a service designed to improve the printing experience of students and teachers around the globe.</p>
-	{% csrf_token %}
-        <div class="dropzone" id="dropzone">Drop files here to upload</div>
-        <script>
-	    (function() {
-		    var dropzone = document.getElementById("dropzone");
-		    var upload = function(file) {
-			var formData = new FormData();
-			var xhr = new XMLHttpRequest();
-			formData.append('file', file[0]);
-			console.log(formData);
-			xhr.open("POST", "");
-			xhr.setRequestHeader("X-CSRFToken", "{{csrf_token}}")
-			xhr.send(formData);
-		    };
-		    dropzone.ondrop = function(e) {
-			e.preventDefault();
-			this.className = "dropzone";
-			upload(e.dataTransfer.files);
-		    };
-		    dropzone.ondragover = function() {
-			    this.className = "dropzone dragover";
-			    return false;
-		    };
-		    dropzone.ondragleave = function() {
-			    this.className = "dropzone";
-			    return false;
-		    };
-	    }());
-        </script>
-	</br>
+    <video style="border: 5px solid black;" width="500" controls><source src="https://dl.igloo.to/buzzvideo.mp4" type="video/mp4" /></video>
   </div>
 </div>
 {% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <a href="http://dragonfruit.me" class="lang-logo">
+      <img src="{% static 'logo.png'%}">
+    </a>
+    <h1>Welcome, {{ request.user.username }}!</h1>
+    <p>This is your student profile, where you can print documents and images. Try uploading a file to print below!</p>
+	{% csrf_token %}
+        <div class="dropzone" id="dropzone">Drop files here to print</div>
+        <script>
+	    (function() {
+		    var dropzone = document.getElementById("dropzone");
+		    var upload = function(file) {
+			var formData = new FormData();
+			var xhr = new XMLHttpRequest();
+			formData.append('file', file[0]);
+			console.log(formData);
+			xhr.open("POST", "");
+			xhr.setRequestHeader("X-CSRFToken", "{{csrf_token}}")
+			xhr.send(formData);
+		    };
+		    dropzone.ondrop = function(e) {
+			e.preventDefault();
+			this.className = "dropzone";
+			upload(e.dataTransfer.files);
+		    };
+		    dropzone.ondragover = function() {
+			    this.className = "dropzone dragover";
+			    return false;
+		    };
+		    dropzone.ondragleave = function() {
+			    this.className = "dropzone";
+			    return false;
+		    };
+	    }());
+        </script>
+	</br>
+  </div>
+</div>
+{% endblock %}
